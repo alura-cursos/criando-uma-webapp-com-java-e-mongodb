@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta charset="UTF-8" />
+<link type="text/css" rel="stylesheet"
+	href="../../materialize/css/materialize.min.css"
+	media="screen,projection" />
+<link href="https://fonts.googleapis.com/icon?family=Material+Icons"
+	rel="stylesheet" />
+<title>EscolAlura</title>
+<script type="text/javascript"
+	src="https://code.jquery.com/jquery-2.1.1.min.js"></script>
+<script type="text/javascript" src="../js/inicializar.js"></script>
+<script type="text/javascript" src="../js/googlemaps.js"></script>
+
+
+
+<link type="text/css" rel="stylesheet" href="../css/main.css" />
+</head>
+<body class="grey lighten-3">
+	<div id="formularioGeolocalizacao" class="container">
+		<h3 class="main-title center">Visualizar Aluno</h3>
+		<form class="col s12" action="/geolocalizacao/pesquisar" method="get">
+			<div class="row">
+				<div class="input-field col s12">
+					<select name="alunoId" id="alunoId">
+						<option th:each="aluno : ${alunos}" th:value="${aluno.id}"
+							th:text="${aluno.nome}">Nome do Aluno</option>
+					</select> <label for="aluno">Alunos</label>
+				</div>
+			</div>
+			<div th:if="${alunosProximos} != null">
+				<div class="row">
+					<div id="map" class="mapa"></div>
+				</div>
+			</div>
+			<div class="row">
+				<div class="input-field col s12 center">
+					<button class="btn waves-effect waves-light" type="submit">Pesquisar</button>
+				</div>
+			</div>
+		</form>
+		<script th:inline="javascript">
+				/*<![CDATA[*/
+				    var alunos = [[${alunosProximos}]];
+				/*]]>*/
+			</script>
+
+		<script
+			src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAIPw0BOFbsavl2S0XJm366GqIL8WaL4xw&amp;callback=initMap"
+			async="async" defer="defer"></script>
+
+
+	</div>
+	<script type="text/javascript"
+		src="../../materialize/js/materialize.min.js"></script>
+</body>
+</html>
